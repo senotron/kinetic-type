@@ -3,278 +3,208 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>KineticType — World-Class Kinetic Typography & Physics Engine</title>
+  <title>KineticType — Minimalist Text Physics Engine</title>
   
-  <!-- SEO & Social Meta Tags -->
-  <meta name="description" content="Awwwards-level interactive kinetic typography & spring physics engine. Turn static headings into mind-blowing reactive particle graphics in real-time.">
-  <meta name="keywords" content="kinetic typography, physics engine, canvas animation, dynamic typography, interactive design, javascript library">
+  <!-- Meta Tags -->
+  <meta name="description" content="Ultra-clean, minimalist interactive kinetic typography and physics engine built with pure JavaScript & HTML5 Canvas.">
   <meta name="author" content="senotron / KineticType">
 
-  <!-- Google Fonts -->
+  <!-- Google Fonts: Inter & Space Grotesk -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;600&family=Inter:wght@300;400;500;600;700;800;900&family=Orbitron:wght@600;800;900&family=Outfit:wght@600;800;900&family=Playfair+Display:ital,wght@0,700;1,900&family=Space+Grotesk:wght@600;700;900&family=Syne:wght@700;800;900&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500&family=Inter:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
   
-  <!-- FontAwesome Icons -->
+  <!-- Feather / FontAwesome Icons -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   
-  <!-- Custom Design System & Studio Styles -->
+  <!-- Apple / Linear Minimalist Design Styles -->
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <!-- Ambient Mesh Gradient Glows -->
-  <div class="ambient-glow glow-1"></div>
-  <div class="ambient-glow glow-2"></div>
-  <div class="ambient-glow glow-3"></div>
-
-  <div class="app-container">
-    <!-- Top Glass Header -->
-    <header class="app-header">
-      <div class="brand">
-        <div class="brand-logo-wrapper">
-          <div class="brand-logo">
-            <i class="fa-solid fa-atom fa-spin-pulse" style="--fa-animation-duration: 12s;"></i>
-          </div>
-          <div class="logo-glow"></div>
+  <div class="app-shell">
+    <!-- Top Header -->
+    <header class="navbar">
+      <div class="nav-left">
+        <div class="logo-mark">
+          <div class="logo-dot"></div>
         </div>
-        <div class="brand-text">
-          <div class="brand-title-row">
-            <h1>KineticType</h1>
-            <span class="version-tag"><span class="pulse-dot"></span> v1.0.0</span>
-          </div>
-          <p class="brand-subtitle">Dynamic Typography & Text Physics Engine</p>
+        <div class="logo-text">
+          <span class="brand-name">KineticType</span>
+          <span class="version-pill">v1.0</span>
         </div>
       </div>
 
-      <!-- Center Presets Bar -->
-      <nav class="preset-nav">
-        <div class="preset-nav-title"><i class="fa-solid fa-wand-magic-sparkles"></i> Presets</div>
-        <div class="preset-pills">
-          <button class="preset-pill active" data-preset="cosmic">
-            <span class="pill-dot cosmic-dot"></span> Cosmic Magnet
-          </button>
-          <button class="preset-pill" data-preset="detonate">
-            <span class="pill-dot detonate-dot"></span> Explode
-          </button>
-          <button class="preset-pill" data-preset="liquid">
-            <span class="pill-dot liquid-dot"></span> Liquid Wave
-          </button>
-          <button class="preset-pill" data-preset="gravity">
-            <span class="pill-dot gravity-dot"></span> Gravity Drop
-          </button>
-          <button class="preset-pill" data-preset="cyberpunk">
-            <span class="pill-dot cyberpunk-dot"></span> Matrix Sine
-          </button>
+      <!-- Center Minimal Preset Pills -->
+      <div class="nav-center">
+        <div class="preset-group">
+          <button class="preset-pill active" data-preset="cosmic">Cosmic</button>
+          <button class="preset-pill" data-preset="detonate">Explode</button>
+          <button class="preset-pill" data-preset="liquid">Liquid</button>
+          <button class="preset-pill" data-preset="gravity">Gravity</button>
+          <button class="preset-pill" data-preset="cyberpunk">Matrix</button>
         </div>
-      </nav>
+      </div>
 
-      <!-- Action Buttons -->
-      <div class="header-actions">
-        <button class="btn btn-glass" id="btnExportCode">
-          <i class="fa-solid fa-code"></i> <span>Get Code</span>
+      <!-- Right Actions -->
+      <div class="nav-right">
+        <button class="btn btn-secondary" id="btnExportCode">
+          <i class="fa-solid fa-code"></i> Get Code
         </button>
-        <button class="btn btn-neon" id="btnDownloadImage">
-          <i class="fa-solid fa-cloud-arrow-down"></i> <span>Export PNG</span>
+        <button class="btn btn-primary" id="btnDownloadImage">
+          <i class="fa-solid fa-arrow-down"></i> Export PNG
         </button>
-        <a href="https://github.com/senotron/kinetic-type" target="_blank" class="github-btn" title="GitHub Repository">
+        <a href="https://github.com/senotron/kinetic-type" target="_blank" class="nav-github" title="GitHub">
           <i class="fa-brands fa-github"></i>
         </a>
       </div>
     </header>
 
-    <!-- Main Studio Workspace -->
-    <div class="workspace">
-      <!-- Sidebar Control Panel -->
-      <aside class="studio-sidebar">
-        <div class="sidebar-header">
-          <div class="sidebar-title">
-            <i class="fa-solid fa-sliders"></i>
-            <span>Physics Controls</span>
-          </div>
-          <button id="btnResetPhysics" class="icon-btn" title="Reset All Settings">
-            <i class="fa-solid fa-rotate-left"></i>
+    <!-- Main Workspace Layout -->
+    <div class="main-layout">
+      <!-- Minimal Left Sidebar -->
+      <aside class="sidebar">
+        <div class="sidebar-top">
+          <span class="sidebar-heading">Controls</span>
+          <button id="btnResetPhysics" class="reset-btn" title="Reset All">
+            <i class="fa-solid fa-arrow-rotate-left"></i>
           </button>
         </div>
 
-        <div class="sidebar-scrollable">
-          <!-- Text Input Card -->
-          <div class="panel-section">
-            <div class="section-label"><i class="fa-solid fa-font"></i> Input Typography</div>
-            <div class="input-wrapper">
-              <input type="text" id="inputText" value="KINETIC" placeholder="Type headline..." autocomplete="off">
-              <i class="fa-solid fa-pen input-icon"></i>
-            </div>
+        <div class="sidebar-body">
+          <!-- Text Input -->
+          <div class="control-block">
+            <label class="control-label" for="inputText">Text Headline</label>
+            <input type="text" id="inputText" value="KINETIC" placeholder="Type text..." autocomplete="off">
           </div>
 
-          <!-- Font Family Selector -->
-          <div class="panel-section">
-            <div class="section-label"><i class="fa-solid fa-heading"></i> Font Face</div>
-            <div class="select-wrapper">
-              <select id="selectFont">
-                <option value="'Space Grotesk', sans-serif" selected>Space Grotesk (Tech Modern)</option>
-                <option value="'Syne', sans-serif">Syne (Ultra Heavy Display)</option>
-                <option value="'Orbitron', sans-serif">Orbitron (Futuristic Cyber)</option>
-                <option value="'Outfit', sans-serif">Outfit (Clean Geometric)</option>
-                <option value="'Inter', sans-serif">Inter (Minimal Neo-Grotesque)</option>
-                <option value="'Playfair Display', serif">Playfair Display (Luxury Serif)</option>
-              </select>
-              <i class="fa-solid fa-chevron-down select-icon"></i>
-            </div>
+          <!-- Font Face -->
+          <div class="control-block">
+            <label class="control-label" for="selectFont">Font Family</label>
+            <select id="selectFont">
+              <option value="'Space Grotesk', sans-serif" selected>Space Grotesk</option>
+              <option value="'Inter', sans-serif">Inter</option>
+              <option value="'Syne', sans-serif">Syne</option>
+              <option value="'Outfit', sans-serif">Outfit</option>
+              <option value="'Orbitron', sans-serif">Orbitron</option>
+              <option value="'Playfair Display', serif">Playfair Display</option>
+            </select>
           </div>
 
-          <!-- Interaction Mode Grid -->
-          <div class="panel-section">
-            <div class="section-label"><i class="fa-solid fa-atom"></i> Interaction Mode</div>
-            <div class="mode-grid">
-              <button class="mode-btn active" data-mode="magnetic">
-                <div class="mode-icon"><i class="fa-solid fa-magnet"></i></div>
-                <div class="mode-name">Magnetic</div>
-              </button>
-              <button class="mode-btn" data-mode="explode">
-                <div class="mode-icon"><i class="fa-solid fa-bomb"></i></div>
-                <div class="mode-name">Explode</div>
-              </button>
-              <button class="mode-btn" data-mode="wave">
-                <div class="mode-icon"><i class="fa-solid fa-wave-square"></i></div>
-                <div class="mode-name">Liquid Wave</div>
-              </button>
-              <button class="mode-btn" data-mode="gravity">
-                <div class="mode-icon"><i class="fa-solid fa-arrow-down-long"></i></div>
-                <div class="mode-name">Gravity</div>
-              </button>
-              <button class="mode-btn" data-mode="matrix">
-                <div class="mode-icon"><i class="fa-solid fa-cubes"></i></div>
-                <div class="mode-name">Matrix</div>
-              </button>
+          <!-- Interaction Mode Segmented Control -->
+          <div class="control-block">
+            <label class="control-label">Interaction Mode</label>
+            <div class="segmented-control">
+              <button class="segment-btn active" data-mode="magnetic">Magnet</button>
+              <button class="segment-btn" data-mode="explode">Explode</button>
+              <button class="segment-btn" data-mode="wave">Wave</button>
+              <button class="segment-btn" data-mode="gravity">Gravity</button>
+              <button class="segment-btn" data-mode="matrix">Matrix</button>
             </div>
           </div>
 
           <!-- Color Palette Picker -->
-          <div class="panel-section">
-            <div class="section-label"><i class="fa-solid fa-palette"></i> Color Gradient</div>
-            <div class="palette-grid">
-              <button class="palette-swatch active" data-colors="#00f2fe,#4facfe,#6b11ff" style="background: linear-gradient(135deg, #00f2fe, #6b11ff);" title="Cyber Cyan & Violet"></button>
-              <button class="palette-swatch" data-colors="#ff0844,#ffb199" style="background: linear-gradient(135deg, #ff0844, #ffb199);" title="Neon Crimson"></button>
-              <button class="palette-swatch" data-colors="#00ff87,#60efff" style="background: linear-gradient(135deg, #00ff87, #60efff);" title="Acid Green"></button>
-              <button class="palette-swatch" data-colors="#f9d423,#ff4e50" style="background: linear-gradient(135deg, #f9d423, #ff4e50);" title="Solar Gold"></button>
-              <button class="palette-swatch" data-colors="#e0c3fc,#8ec5fc" style="background: linear-gradient(135deg, #e0c3fc, #8ec5fc);" title="Pastel Neon"></button>
-              <button class="palette-swatch" data-colors="#ffffff,#888888" style="background: linear-gradient(135deg, #ffffff, #666666);" title="Pure Monochrome"></button>
+          <div class="control-block">
+            <label class="control-label">Color Palette</label>
+            <div class="palette-row">
+              <button class="color-dot active" data-colors="#ffffff,#94a3b8,#334155" style="background: linear-gradient(135deg, #ffffff, #64748b);" title="Monochrome Slate"></button>
+              <button class="color-dot" data-colors="#38bdf8,#818cf8,#c084fc" style="background: linear-gradient(135deg, #38bdf8, #c084fc);" title="Indigo Sky"></button>
+              <button class="color-dot" data-colors="#34d399,#2dd4bf" style="background: linear-gradient(135deg, #34d399, #2dd4bf);" title="Emerald Mist"></button>
+              <button class="color-dot" data-colors="#fb7185,#f43f5e" style="background: linear-gradient(135deg, #fb7185, #f43f5e);" title="Rose Tint"></button>
+              <button class="color-dot" data-colors="#fbbf24,#f59e0b" style="background: linear-gradient(135deg, #fbbf24, #f59e0b);" title="Amber Warmth"></button>
             </div>
           </div>
 
-          <!-- Typography Size & Density Sliders -->
-          <div class="panel-section">
-            <div class="slider-header">
-              <span class="slider-title">Font Size</span>
-              <span id="valFontSize" class="slider-badge">90px</span>
+          <div class="divider"></div>
+
+          <!-- Sliders -->
+          <div class="control-block">
+            <div class="slider-row">
+              <span class="control-label">Font Size</span>
+              <span id="valFontSize" class="val-tag">90px</span>
             </div>
             <input type="range" id="rangeFontSize" min="40" max="180" value="90">
           </div>
 
-          <div class="panel-section">
-            <div class="slider-header">
-              <span class="slider-title">Particle Density</span>
-              <span id="valDensity" class="slider-badge">High (4)</span>
+          <div class="control-block">
+            <div class="slider-row">
+              <span class="control-label">Particle Density</span>
+              <span id="valDensity" class="val-tag">4</span>
             </div>
             <input type="range" id="rangeDensity" min="2" max="8" value="4" step="1">
           </div>
 
-          <!-- Physics Parameters Accordion -->
-          <div class="physics-divider">
-            <span><i class="fa-solid fa-bolt"></i> Advanced Physics Engine</span>
-          </div>
-
-          <div class="panel-section">
-            <div class="slider-header">
-              <span class="slider-title">Spring Stiffness (k)</span>
-              <span id="valStiffness" class="slider-badge">0.08</span>
+          <div class="control-block">
+            <div class="slider-row">
+              <span class="control-label">Spring Stiffness</span>
+              <span id="valStiffness" class="val-tag">0.08</span>
             </div>
             <input type="range" id="rangeStiffness" min="0.01" max="0.25" step="0.01" value="0.08">
           </div>
 
-          <div class="panel-section">
-            <div class="slider-header">
-              <span class="slider-title">Damping / Friction</span>
-              <span id="valDamping" class="slider-badge">0.85</span>
+          <div class="control-block">
+            <div class="slider-row">
+              <span class="control-label">Damping (Friction)</span>
+              <span id="valDamping" class="val-tag">0.85</span>
             </div>
             <input type="range" id="rangeDamping" min="0.50" max="0.98" step="0.01" value="0.85">
           </div>
 
-          <div class="panel-section">
-            <div class="slider-header">
-              <span class="slider-title">Mouse Radius (px)</span>
-              <span id="valRadius" class="slider-badge">130px</span>
+          <div class="control-block">
+            <div class="slider-row">
+              <span class="control-label">Mouse Radius</span>
+              <span id="valRadius" class="val-tag">130px</span>
             </div>
             <input type="range" id="rangeRadius" min="50" max="300" step="5" value="130">
           </div>
 
-          <div class="panel-section">
-            <div class="slider-header">
-              <span class="slider-title">Force Strength</span>
-              <span id="valForceStrength" class="slider-badge">1.2x</span>
+          <div class="control-block">
+            <div class="slider-row">
+              <span class="control-label">Force Multiplier</span>
+              <span id="valForceStrength" class="val-tag">1.2x</span>
             </div>
             <input type="range" id="rangeForceStrength" min="0.2" max="3.0" step="0.1" value="1.2">
           </div>
         </div>
       </aside>
 
-      <!-- Main Canvas Preview Viewport -->
-      <section class="canvas-viewport">
-        <div class="viewport-frame">
-          <!-- Canvas Overlay Reticles -->
-          <div class="reticle top-left"></div>
-          <div class="reticle top-right"></div>
-          <div class="reticle bottom-left"></div>
-          <div class="reticle bottom-right"></div>
-
-          <!-- HUD Diagnostics Bar -->
-          <div class="viewport-hud">
-            <div class="hud-chip">
-              <span class="hud-status-dot"></span>
-              <span>ENGINE ONLINE</span>
-            </div>
-            <div class="hud-chip">
-              <i class="fa-solid fa-gauge-high"></i> FPS: <strong id="hudFps">60</strong>
-            </div>
-            <div class="hud-chip">
-              <i class="fa-solid fa-shapes"></i> PARTICLES: <strong id="hudParticles">0</strong>
-            </div>
-            <div class="hud-chip">
-              <i class="fa-solid fa-layer-group"></i> MODE: <strong id="hudMode">Magnetic</strong>
-            </div>
+      <!-- Main Canvas Viewport -->
+      <section class="viewport">
+        <div class="canvas-card">
+          <!-- Minimal Top HUD -->
+          <div class="canvas-hud">
+            <div class="hud-tag"><span class="green-dot"></span> Ready</div>
+            <div class="hud-tag">FPS: <span id="hudFps">60</span></div>
+            <div class="hud-tag">Particles: <span id="hudParticles">0</span></div>
+            <div class="hud-tag">Mode: <span id="hudMode">Magnetic</span></div>
           </div>
 
-          <!-- Interactive Canvas Container -->
-          <div id="canvasMount" class="canvas-mount"></div>
+          <!-- Canvas Target -->
+          <div id="canvasMount" class="canvas-container"></div>
 
-          <!-- Interactive Guidance Tooltip Pills -->
-          <div class="interactive-hints">
-            <div class="hint-pill"><i class="fa-solid fa-hand-pointer"></i> Move cursor over text for physics deflection</div>
-            <div class="hint-pill"><i class="fa-solid fa-burst"></i> Click canvas to detonate particle explosion</div>
+          <!-- Subtle Guidance Bar -->
+          <div class="canvas-footer-hint">
+            <span>Hover cursor over text to interact • Click canvas to detonate</span>
           </div>
         </div>
       </section>
     </div>
 
-    <!-- Code Export Modal -->
-    <div id="exportModal" class="modal-overlay">
-      <div class="modal-card">
-        <div class="modal-header">
-          <div class="modal-title">
-            <i class="fa-solid fa-code"></i> Integration Snippet
-          </div>
-          <button id="btnCloseModal" class="icon-btn">&times;</button>
+    <!-- Minimal Code Export Modal -->
+    <div id="exportModal" class="modal-backdrop">
+      <div class="modal-window">
+        <div class="modal-top">
+          <span class="modal-heading">Integration Code</span>
+          <button id="btnCloseModal" class="close-btn">&times;</button>
         </div>
-        <div class="modal-body">
-          <p class="modal-description">Copy this snippet to integrate your custom KineticType text physics engine into any web page or app:</p>
-          
-          <div class="code-header">
+        <div class="modal-content">
+          <p class="modal-text">Copy and paste this snippet to embed KineticType into your web app:</p>
+          <div class="code-action-bar">
             <span>HTML / JavaScript</span>
-            <button id="btnCopySnippet" class="btn btn-sm btn-neon">
+            <button id="btnCopySnippet" class="btn btn-sm btn-secondary">
               <i class="fa-solid fa-copy"></i> Copy Code
             </button>
           </div>
-          <div class="code-viewport">
+          <div class="code-box">
             <pre><code id="snippetCode"></code></pre>
           </div>
         </div>
@@ -282,7 +212,7 @@
     </div>
   </div>
 
-  <!-- Core Engine & Logic -->
+  <!-- Engine Scripts -->
   <script src="kinetic-type.js"></script>
   <script src="app.js"></script>
 </body>

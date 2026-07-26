@@ -1,9 +1,8 @@
 /**
- * KineticType Studio App Logic
+ * KineticType — Minimalist Studio Logic
  */
 
 document.addEventListener('DOMContentLoaded', () => {
-  // Mount Canvas Element
   const canvasMount = document.getElementById('canvasMount');
   const inputText = document.getElementById('inputText');
   const selectFont = document.getElementById('selectFont');
@@ -25,8 +24,8 @@ document.addEventListener('DOMContentLoaded', () => {
   const hudParticles = document.getElementById('hudParticles');
   const hudMode = document.getElementById('hudMode');
 
-  const modeBtns = document.querySelectorAll('.mode-btn');
-  const paletteSwatches = document.querySelectorAll('.palette-swatch');
+  const segmentBtns = document.querySelectorAll('.segment-btn');
+  const colorDots = document.querySelectorAll('.color-dot');
   const presetPills = document.querySelectorAll('.preset-pill');
   const btnExportCode = document.getElementById('btnExportCode');
   const btnDownloadImage = document.getElementById('btnDownloadImage');
@@ -38,7 +37,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const snippetCode = document.getElementById('snippetCode');
 
   // Engine Active State
-  let currentColors = ['#00f2fe', '#4facfe', '#6b11ff'];
+  let currentColors = ['#ffffff', '#94a3b8', '#334155'];
   let currentMode = 'magnetic';
 
   // Instantiate KineticType Engine
@@ -57,7 +56,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   });
 
-  // Real-time FPS Diagnostics Counter
+  // FPS Diagnostics Counter
   let lastFrameTime = performance.now();
   let frameCount = 0;
 
@@ -75,7 +74,7 @@ document.addEventListener('DOMContentLoaded', () => {
   }
   requestAnimationFrame(updateHUD);
 
-  // Control Listeners
+  // Input Listeners
   inputText.addEventListener('input', (e) => {
     ktInstance.setText(e.target.value.trim() || 'KINETIC');
   });
@@ -92,9 +91,8 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
   rangeDensity.addEventListener('input', (e) => {
-    const val = e.target.value;
-    valDensity.textContent = val == 2 ? 'Ultra High (2)' : val == 4 ? 'High (4)' : `Med (${val})`;
-    ktInstance.updateOptions({ density: parseInt(val) });
+    valDensity.textContent = e.target.value;
+    ktInstance.updateOptions({ density: parseInt(e.target.value) });
   });
 
   rangeStiffness.addEventListener('input', (e) => {
@@ -117,22 +115,22 @@ document.addEventListener('DOMContentLoaded', () => {
     ktInstance.updateOptions({ physics: { forceStrength: parseFloat(e.target.value) } });
   });
 
-  // Mode Selection Cards
-  modeBtns.forEach(btn => {
+  // Mode Selection
+  segmentBtns.forEach(btn => {
     btn.addEventListener('click', () => {
-      modeBtns.forEach(b => b.classList.remove('active'));
+      segmentBtns.forEach(b => b.classList.remove('active'));
       btn.classList.add('active');
       currentMode = btn.dataset.mode;
       ktInstance.setMode(currentMode);
     });
   });
 
-  // Color Swatch Selection
-  paletteSwatches.forEach(swatch => {
-    swatch.addEventListener('click', () => {
-      paletteSwatches.forEach(s => s.classList.remove('active'));
-      swatch.classList.add('active');
-      currentColors = swatch.dataset.colors.split(',');
+  // Color Dot Selection
+  colorDots.forEach(dot => {
+    dot.addEventListener('click', () => {
+      colorDots.forEach(d => d.classList.remove('active'));
+      dot.classList.add('active');
+      currentColors = dot.dataset.colors.split(',');
       ktInstance.updateOptions({ color: currentColors });
     });
   });
@@ -146,7 +144,7 @@ document.addEventListener('DOMContentLoaded', () => {
       stiffness: 0.08,
       damping: 0.85,
       radius: 130,
-      colors: ['#00f2fe', '#4facfe', '#6b11ff']
+      colors: ['#ffffff', '#94a3b8', '#334155']
     },
     detonate: {
       mode: 'explode',
@@ -155,7 +153,7 @@ document.addEventListener('DOMContentLoaded', () => {
       stiffness: 0.12,
       damping: 0.80,
       radius: 180,
-      colors: ['#ff0844', '#ffb199']
+      colors: ['#fb7185', '#f43f5e']
     },
     liquid: {
       mode: 'wave',
@@ -164,7 +162,7 @@ document.addEventListener('DOMContentLoaded', () => {
       stiffness: 0.05,
       damping: 0.90,
       radius: 150,
-      colors: ['#00ff87', '#60efff']
+      colors: ['#34d399', '#2dd4bf']
     },
     gravity: {
       mode: 'gravity',
@@ -173,7 +171,7 @@ document.addEventListener('DOMContentLoaded', () => {
       stiffness: 0.06,
       damping: 0.88,
       radius: 140,
-      colors: ['#f9d423', '#ff4e50']
+      colors: ['#fbbf24', '#f59e0b']
     },
     cyberpunk: {
       mode: 'matrix',
@@ -182,7 +180,7 @@ document.addEventListener('DOMContentLoaded', () => {
       stiffness: 0.10,
       damping: 0.82,
       radius: 160,
-      colors: ['#e0c3fc', '#8ec5fc']
+      colors: ['#38bdf8', '#c084fc']
     }
   };
 
@@ -205,7 +203,7 @@ document.addEventListener('DOMContentLoaded', () => {
         currentMode = p.mode;
         currentColors = p.colors;
 
-        modeBtns.forEach(m => m.classList.toggle('active', m.dataset.mode === currentMode));
+        segmentBtns.forEach(s => s.classList.toggle('active', s.dataset.mode === currentMode));
 
         ktInstance.updateOptions({
           fontFamily: p.font,
