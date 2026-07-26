@@ -1,0 +1,7 @@
+# NPM Ignore List
+index.html
+style.css
+app.js
+server.js
+.git
+.github

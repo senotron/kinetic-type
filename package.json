@@ -3,8 +3,19 @@
   "version": "1.0.0",
   "description": "Dynamic Typography & Text Physics Engine - A lightweight interactive physics & kinetic typography JS library.",
   "main": "kinetic-type.js",
+  "types": "index.d.ts",
+  "files": [
+    "kinetic-type.js",
+    "index.d.ts",
+    "README.md",
+    "LICENSE"
+  ],
   "scripts": {
-    "start": "npx serve ."
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/senotron/kinetic-type.git"
   },
   "keywords": [
     "typography",
@@ -17,6 +28,10 @@
     "javascript-library",
     "open-source"
   ],
-  "author": "Antigravity Open Source",
-  "license": "MIT"
+  "author": "senotron <senotron@users.noreply.github.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/senotron/kinetic-type/issues"
+  },
+  "homepage": "https://github.com/senotron/kinetic-type#readme"
 }
