@@ -3,7 +3,7 @@
  */
 
 document.addEventListener('DOMContentLoaded', () => {
-  // UI Elements
+  // Mount Canvas Element
   const canvasMount = document.getElementById('canvasMount');
   const inputText = document.getElementById('inputText');
   const selectFont = document.getElementById('selectFont');
@@ -25,9 +25,9 @@ document.addEventListener('DOMContentLoaded', () => {
   const hudParticles = document.getElementById('hudParticles');
   const hudMode = document.getElementById('hudMode');
 
-  const modeCards = document.querySelectorAll('.mode-card');
-  const paletteBtns = document.querySelectorAll('.palette-btn');
-  const presetBtns = document.querySelectorAll('.preset-btn');
+  const modeBtns = document.querySelectorAll('.mode-btn');
+  const paletteSwatches = document.querySelectorAll('.palette-swatch');
+  const presetPills = document.querySelectorAll('.preset-pill');
   const btnExportCode = document.getElementById('btnExportCode');
   const btnDownloadImage = document.getElementById('btnDownloadImage');
   const btnResetPhysics = document.getElementById('btnResetPhysics');
@@ -37,7 +37,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const btnCopySnippet = document.getElementById('btnCopySnippet');
   const snippetCode = document.getElementById('snippetCode');
 
-  // Default Instance Settings
+  // Engine Active State
   let currentColors = ['#00f2fe', '#4facfe', '#6b11ff'];
   let currentMode = 'magnetic';
 
@@ -57,7 +57,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   });
 
-  // FPS Monitoring
+  // Real-time FPS Diagnostics Counter
   let lastFrameTime = performance.now();
   let frameCount = 0;
 
@@ -75,13 +75,12 @@ document.addEventListener('DOMContentLoaded', () => {
   }
   requestAnimationFrame(updateHUD);
 
-  // Input Listeners
+  // Control Listeners
   inputText.addEventListener('input', (e) => {
     ktInstance.setText(e.target.value.trim() || 'KINETIC');
   });
 
   selectFont.addEventListener('change', (e) => {
-    // Force web font render tick
     document.fonts.ready.then(() => {
       ktInstance.updateOptions({ fontFamily: e.target.value });
     });
@@ -94,7 +93,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   rangeDensity.addEventListener('input', (e) => {
     const val = e.target.value;
-    valDensity.textContent = val == 2 ? 'Ultra High (2)' : val == 4 ? 'High (4)' : `Medium (${val})`;
+    valDensity.textContent = val == 2 ? 'Ultra High (2)' : val == 4 ? 'High (4)' : `Med (${val})`;
     ktInstance.updateOptions({ density: parseInt(val) });
   });
 
@@ -118,28 +117,28 @@ document.addEventListener('DOMContentLoaded', () => {
     ktInstance.updateOptions({ physics: { forceStrength: parseFloat(e.target.value) } });
   });
 
-  // Mode Selection
-  modeCards.forEach(card => {
-    card.addEventListener('click', () => {
-      modeCards.forEach(c => c.classList.remove('active'));
-      card.classList.add('active');
-      currentMode = card.dataset.mode;
+  // Mode Selection Cards
+  modeBtns.forEach(btn => {
+    btn.addEventListener('click', () => {
+      modeBtns.forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      currentMode = btn.dataset.mode;
       ktInstance.setMode(currentMode);
     });
   });
 
-  // Palette Selection
-  paletteBtns.forEach(btn => {
-    btn.addEventListener('click', () => {
-      paletteBtns.forEach(b => b.classList.remove('active'));
-      btn.classList.add('active');
-      currentColors = btn.dataset.colors.split(',');
+  // Color Swatch Selection
+  paletteSwatches.forEach(swatch => {
+    swatch.addEventListener('click', () => {
+      paletteSwatches.forEach(s => s.classList.remove('active'));
+      swatch.classList.add('active');
+      currentColors = swatch.dataset.colors.split(',');
       ktInstance.updateOptions({ color: currentColors });
     });
   });
 
-  // Presets Configuration Map
-  const presets = {
+  // Presets Map
+  const presetsMap = {
     cosmic: {
       mode: 'magnetic',
       font: "'Space Grotesk', sans-serif",
@@ -187,11 +186,11 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   };
 
-  presetBtns.forEach(btn => {
-    btn.addEventListener('click', () => {
-      presetBtns.forEach(b => b.classList.remove('active'));
-      btn.classList.add('active');
-      const p = presets[btn.dataset.preset];
+  presetPills.forEach(pill => {
+    pill.addEventListener('click', () => {
+      presetPills.forEach(p => p.classList.remove('active'));
+      pill.classList.add('active');
+      const p = presetsMap[pill.dataset.preset];
       if (p) {
         selectFont.value = p.font;
         rangeFontSize.value = p.size;
@@ -206,10 +205,7 @@ document.addEventListener('DOMContentLoaded', () => {
         currentMode = p.mode;
         currentColors = p.colors;
 
-        // Sync mode card active state
-        modeCards.forEach(c => {
-          c.classList.toggle('active', c.dataset.mode === currentMode);
-        });
+        modeBtns.forEach(m => m.classList.toggle('active', m.dataset.mode === currentMode));
 
         ktInstance.updateOptions({
           fontFamily: p.font,
@@ -248,17 +244,17 @@ document.addEventListener('DOMContentLoaded', () => {
     ktInstance.reset();
   });
 
-  // Export Code Modal Logic
+  // Export Code Modal
   btnExportCode.addEventListener('click', () => {
-    const code = `<!-- 1. Include Container in your HTML -->
-<div id="kineticContainer" style="width: 100%; height: 350px;"></div>
+    const snippet = `<!-- 1. HTML Container -->
+<div id="kineticHeading" style="width: 100%; height: 350px;"></div>
 
-<!-- 2. Import KineticType.js -->
+<!-- 2. Import KineticType Library -->
 <script src="https://cdn.jsdelivr.net/npm/kinetic-type@1.0.0/kinetic-type.js"></script>
 
 <script>
-  // 3. Initialize Physics Engine
-  const kt = new KineticType('#kineticContainer', {
+  // 3. Initialize Engine
+  const kt = new KineticType('#kineticHeading', {
     text: "${inputText.value}",
     mode: "${currentMode}",
     fontFamily: "${selectFont.value}",
@@ -273,7 +269,7 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 </script>`;
 
-    snippetCode.textContent = code;
+    snippetCode.textContent = snippet;
     exportModal.classList.add('active');
   });
 
@@ -289,12 +285,11 @@ document.addEventListener('DOMContentLoaded', () => {
     }, 2000);
   });
 
-  // Download Snapshot PNG
+  // PNG Export
   btnDownloadImage.addEventListener('click', () => {
-    const canvas = ktInstance.canvas;
     const link = document.createElement('a');
     link.download = `kinetic-type-${Date.now()}.png`;
-    link.href = canvas.toDataURL('image/png');
+    link.href = ktInstance.canvas.toDataURL('image/png');
     link.click();
   });
 });
