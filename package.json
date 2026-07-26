@@ -1,0 +1,22 @@
+{
+  "name": "kinetic-type",
+  "version": "1.0.0",
+  "description": "Dynamic Typography & Text Physics Engine - A lightweight interactive physics & kinetic typography JS library.",
+  "main": "kinetic-type.js",
+  "scripts": {
+    "start": "npx serve ."
+  },
+  "keywords": [
+    "typography",
+    "physics-engine",
+    "kinetic-text",
+    "canvas",
+    "interactive",
+    "particles",
+    "spring-physics",
+    "javascript-library",
+    "open-source"
+  ],
+  "author": "Antigravity Open Source",
+  "license": "MIT"
+}
